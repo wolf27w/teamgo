@@ -33,3 +33,13 @@ func CheckLogin(username string, password string) (User, int) {
 	}
 	return user, errmsg.SUCCSE
 }
+
+// CreateUser 新增用户
+func CreateUser(data *User) int {
+	//data.Password = ScryptPw(data.Password)
+	err := db.Create(&data).Error
+	if err != nil {
+		return errmsg.ERROR // 500
+	}
+	return errmsg.SUCCSE
+}
